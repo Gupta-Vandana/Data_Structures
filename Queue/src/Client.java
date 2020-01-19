@@ -10,7 +10,7 @@ public class Client {
 		q.Enqueue(3);
 		q.Enqueue(4);
 		q.Enqueue(5);
-		int r=q.Dequeue();
+		int r = q.Dequeue();
 		q.Enqueue(6);
 		q.display();
 
