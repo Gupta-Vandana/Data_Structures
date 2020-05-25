@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="BinarySearchTree/src"/>
+	<classpathentry kind="src" path="BinaryTree/src"/>
+	<classpathentry kind="src" path="GenericTree/src"/>
+	<classpathentry kind="src" path="GRAPH/src"/>
+	<classpathentry kind="src" path="LinkedList/src"/>
+	<classpathentry kind="src" path="Queue/src"/>
+	<classpathentry kind="src" path="Stack/src"/>
+	<classpathentry kind="src" path="Trie/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="BinarySearchTree/bin"/>
+</classpath>
