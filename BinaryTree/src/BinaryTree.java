@@ -1,4 +1,3 @@
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1965,7 +1964,21 @@ public class BinaryTree {
 		DiagonalTraversal(node.left, d + 1, hm);
 		DiagonalTraversal(node.right, d, hm);
 	}
+
 	// Construction & Conversion
 	// 1.
+	// 28. Convert a Binary Tree into its Mirror Tree
+	private Node InvertBinaryTree(Node node) {
+		if (node == null) {
+			return null;
+		}
+		Node left = InvertBinaryTree(node.left);
+		Node right = InvertBinaryTree(node.right);
+		
+		node.left = left;
+		node.right = right;
+		return node;
+
+	}
 
 }
