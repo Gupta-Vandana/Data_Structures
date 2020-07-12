@@ -1,6 +1,6 @@
 
-// Enqueue->Rear-> ||||||||||||| <-front<-Dequeue
-//  last item/insertion          FIFO        first   item /deleteion                    
+// Enqueue->Back-> ||||||||||||| ->Front->Dequeue
+//  last item/insertion          FIFO        first   item /deletion                    
 public class Queue {
 
 	int front, rear, size;

@@ -1641,7 +1641,6 @@ public class BinaryTree {
 	// 2.Lowest Common Ancestor in a Binary Tree | Set 2 (Using Parent Pointer)
 	// 3.Lowest Common Ancestor in a Binary Tree | Set 3 (Using RMQ)
 	// 4.Find distance between two nodes of a Binary Tree
-
 	// 5.Print common nodes on path from root (or common ancestors)
 
 	// CHECKING AND PRINTING
@@ -1974,7 +1973,7 @@ public class BinaryTree {
 		}
 		Node left = InvertBinaryTree(node.left);
 		Node right = InvertBinaryTree(node.right);
-		
+
 		node.left = left;
 		node.right = right;
 		return node;
