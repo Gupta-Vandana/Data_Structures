@@ -18,8 +18,7 @@ public class Client {
 		l.addAt(100, 9);
 		l.addAt(110, 10);
 		l.display();
-		Stack<Integer> s = new Stack<>();
-		System.out.println(l.palindrome(l.head, s));
+		System.out.println(l.getNthNodeRecursice(l.head, 5));
 		
 
 	}

@@ -11,6 +11,44 @@ public class LinkedList {
 	private Node tail;
 	private int size;
 
+	// o1
+	public int size() {
+		return this.size;
+	}
+
+	// o1
+	public boolean isEmpty() {
+		return this.size == 0;
+	}
+
+	// on
+	public void display() {
+		System.out.println("-------------------------------------------------");
+		Node temp = this.head;
+		while (temp != null) {
+			System.out.print(temp.data + ", ");
+			temp = temp.next;
+		}
+		System.out.println(".");
+		System.out.println("-------------------------------------------------");
+	}
+
+	// o1
+	public int getFirst() throws Exception {
+		if (this.size == 0) {
+			throw new Exception("Linked List is empty");
+		}
+		return this.head.data;
+	}
+
+	// o1
+	public int getLast() throws Exception {
+		if (this.size == 0) {
+			throw new Exception("Linked List is empty");
+		}
+		return this.tail.data;
+	}
+
 	private void handleAdd0(int data) {
 		Node node = new Node();
 		node.data = data;
@@ -19,6 +57,17 @@ public class LinkedList {
 		this.head = node;
 		this.tail = node;
 		this.size = 1;
+	}
+
+	// o1
+	private int handleRemove1() {
+		int rv = this.head.data;
+
+		this.head = null;
+		this.tail = null;
+		this.size = 0;
+
+		return rv;
 	}
 
 	// o1
@@ -74,44 +123,6 @@ public class LinkedList {
 		}
 	}
 
-	// o1
-	public int size() {
-		return this.size;
-	}
-
-	// o1
-	public boolean isEmpty() {
-		return this.size == 0;
-	}
-
-	// on
-	public void display() {
-		System.out.println("-------------------------------------------------");
-		Node temp = this.head;
-		while (temp != null) {
-			System.out.print(temp.data + ", ");
-			temp = temp.next;
-		}
-		System.out.println(".");
-		System.out.println("-------------------------------------------------");
-	}
-
-	// o1
-	public int getFirst() throws Exception {
-		if (this.size == 0) {
-			throw new Exception("Linked List is empty");
-		}
-		return this.head.data;
-	}
-
-	// o1
-	public int getLast() throws Exception {
-		if (this.size == 0) {
-			throw new Exception("Linked List is empty");
-		}
-		return this.tail.data;
-	}
-
 	// on
 	public int getAt(int idx) throws Exception {
 		if (this.size == 0) {
@@ -150,17 +161,6 @@ public class LinkedList {
 		}
 
 		return cnode;
-	}
-
-	// o1
-	private int handleRemove1() {
-		int rv = this.head.data;
-
-		this.head = null;
-		this.tail = null;
-		this.size = 0;
-
-		return rv;
 	}
 
 	// o1
@@ -225,6 +225,29 @@ public class LinkedList {
 		}
 	}
 
+	private void reverseLL() {
+		Node curr = this.head;
+		Node prev = null;
+		while (curr != null) {
+			Node cnext = curr.next;
+
+			curr.next = prev;
+			prev = curr;
+			curr = cnext;
+		}
+	}
+
+	private void reverseLLRecursive(Node curr, Node prev, Node cnext) {
+		if (curr == null) {
+			return;
+		}
+		cnext = curr.next;
+		prev = curr;
+		curr = cnext;
+		reverseLLRecursive(curr, prev, cnext);
+
+	}
+
 	// GFG
 	// Singly Linked List
 	// 1.
@@ -237,52 +260,128 @@ public class LinkedList {
 		this.head = null;
 	}
 
-	// 7.
-	// 8.
-	// 9.
+	// 7.Find Length of a Linked List
+	private int lengthOfLinkedList() {
+		if (this.head == null) {
+			return 0;
+		}
+		int idx = 0;
+		Node node = this.head;
+		while (node != null) {
+			idx++;
+			node = node.next;
+		}
+		return idx;
+	}
+
+	private int lengthOfLinkedListRecursive(Node node, int count) {
+		if (node == null) {
+			return 0;
+		}
+		return lengthOfLinkedListRecursive(node.next, count++);
+	}
+
+	// 8.Search an element in a Linked List
+	private boolean search(int x) {
+		Node node = this.head;
+		while (node != null) {
+			if (node.data == x) {
+				return true;
+			} else {
+				node = node.next;
+			}
+		}
+		return false;
+	}
+
+	private boolean searchRecursive(Node node, int x) {
+
+		if (node == null) {
+			return false;
+		}
+		if (node.data == x) {
+			return true;
+		} else {
+			return searchRecursive(node.next, x);
+		}
+	}
+
+	// 9.Write a function to get Nth node in a Linked List
+	private int getNthNode(int idx) {
+		Node node = this.head;
+		int cidx = 0;
+		while (cidx < idx) {
+			node = node.next;
+			cidx++;
+		}
+		return node.data;
+	}
+
+	public static int getNthNodeRecursice(Node node, int idx) {
+		if (node == null) {
+			return -1;
+		}
+		if (idx == 1) {
+			return node.data;
+		}
+		// idx--;
+		return getNthNodeRecursice(node.next, --idx);
+	}
+
 	// 10.Program for n’th node from the end of a Linked List
 	public int nthNodeFromEnd(int idx) throws Exception {
-		Node ahead = this.getNodeAt(idx);
+//		Node ahead = this.getNodeAt(idx);
+//		Node slow = this.head;
+//		while (ahead != null) {
+//			slow = slow.next;
+//			ahead = ahead.next;
+//		}
+//		return slow.data;
+		Node fast = this.head;
 		Node slow = this.head;
-		while (ahead != null) {
+		int counter = 0;
+		while (counter < idx) {
+			fast = fast.next;
+			counter++;
+		}
+
+		while (fast != null) {
+			fast = fast.next;
 			slow = slow.next;
-			ahead = ahead.next;
 		}
 		return slow.data;
 	}
 
 	// 11.Find the middle of a given linked list
-	// 12.
+	// 12.Count the number of times a given int occurs in a Linked List
 	// 13.Detect loop in linked list
-	public boolean DetectLoop() {
-		HashMap<Node, Integer> hm = new HashMap<>();
-		Node strt = this.head;
-		while (strt != null) {
-			if (hm.containsKey(strt)) {
-				return true;
+	// Floyd’s Cycle-Finding Algorithm
+	private Node detectLoop() {
+		Node fast = this.head;
+		Node slow = this.head;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next;
+			if (fast == slow) {
+				return slow;
 			}
-			hm.put(strt, strt.data);
 		}
-		return true;
+		return null;
 	}
 
 	// 14.Find the length of loop in linked list
 	public int LengthOfLoop() {
-		int length = 0;
-		HashMap<Node, Integer> hm = new HashMap<>();
-		Node strt = this.head;
-		while (strt.next != null) {
-			if (hm.containsKey(strt.next)) {
-				int getl = hm.get(strt);
-				int getl1 = hm.get(strt.next);
-				return getl1 - getl;
-			}
-			hm.put(strt, length++);
+		Node loopDtctd = detectLoop();
+		Node start = this.head;
+		int len = 0;
+		while (loopDtctd != start) {
+			len = len + 1;
+			start = start.next;
 		}
-
-		return 0;
+		return len;
 	}
 
+	// 15.
 	// 31-12-2019
 	// 20. Move last element to front of a given Linked List
 	// eg-1->2->3->4->5 5->1->2->3->4
